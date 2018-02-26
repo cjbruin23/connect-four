@@ -11,3 +11,17 @@
   height: 90px;
   margin: auto;
 }
+.redChip {
+  width: 90px;
+  background: red;
+  border-radius: 50%;
+  height: 90px;
+  margin: auto;
+}
+.blackChip {
+  width: 90px;
+  background: black;
+  border-radius: 50%;
+  height: 90px;
+  margin: auto;
+}
