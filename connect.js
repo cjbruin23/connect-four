@@ -86,14 +86,13 @@ function checkVertical(neededCol, currentPlayer) {
   totalCount = 0;
 }
 
-function checkPer(neededRow, neededCol, currentPlayer) {
+function upAndToTheRight(neededRow, neededCol) {
 
   // Getting the proper position started
   let startingPoint = '';
   let j = neededCol;
   for (let i = neededRow; i < gridSystem.length; i++) {
     startingPoint = String(i) + String(j);
-    // console.log(startingPoint);
     j -= 1;
     if (j < 0) {break;}
   }
@@ -109,7 +108,6 @@ function checkPer(neededRow, neededCol, currentPlayer) {
 
       if (gridSystem[i][startCol] === currentPlayer) {
         totalCount += 1;
-        console.log(totalCount);
       } else {totalCount = 0;}
 
       if (totalCount === 4) {
@@ -119,6 +117,48 @@ function checkPer(neededRow, neededCol, currentPlayer) {
       startCol += 1;
     }
   }
+  totalCount = 0;
+}
+
+function upAndToTheLeft(neededRow, neededCol) {
+  // Getting the proper position started
+  let startingPoint = '';
+  let j = neededCol;
+  for (let i = neededRow; i < gridSystem.length; i++) {
+    startingPoint = String(i) + String(j);
+    j += 1;
+    if (j > gridSystem[0].length) {
+      break;
+    }
+  }
+
+  // Starting from startingPoint and moving up and to the left, checking if theres a win
+  let startCol = Number(startingPoint[1]);
+  let startRow = Number(startingPoint[0]);
+
+  for (let i = startRow; i > 0; i--) {
+    if (startCol < 0) {
+      break;
+    } else {
+        if (gridSystem[i][startCol] === currentPlayer) {
+          totalCount += 1;
+        } else {totalCount = 0;}
+
+        if (totalCount === 4) {
+          alert('win');
+          return;
+        }
+        startCol -= 1;
+    }
+  }
+  totalCount = 0;
+}
+
+function checkPer(neededRow, neededCol, currentPlayer) {
+
+  upAndToTheLeft(neededRow, neededCol);
+  upAndToTheRight(neededRow, neededCol);
+
 }
 
 function checkWin(neededID, currentPlayer) {
