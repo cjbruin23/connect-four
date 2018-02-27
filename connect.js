@@ -91,8 +91,8 @@ function checkPer(currentPlayer) {
   // Checking Down and right
   let j = 0;
   for (let i = gridSystem.length; i >= 0; i--) {
-      // console.log(gridSystem[i][j]);
-      j += 1;
+    // console.log(gridSystem[i][j]);
+    j += 1;
   }
 }
 
