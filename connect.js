@@ -30,6 +30,7 @@ function createGrid() {
 
     nodeWrapper.appendChild(rowNode);
   }
+  createHandler();
 }
 
 function createHandler() {
@@ -85,14 +86,38 @@ function checkVertical(neededCol, currentPlayer) {
   totalCount = 0;
 }
 
-function checkPer(currentPlayer) {
-  // Loop from bottom right to top left
+function checkPer(neededRow, neededCol, currentPlayer) {
 
-  // Checking Down and right
-  let j = 0;
-  for (let i = gridSystem.length; i >= 0; i--) {
-    // console.log(gridSystem[i][j]);
-    j += 1;
+  // Getting the proper position started
+  let startingPoint = '';
+  let j = neededCol;
+  for (let i = neededRow; i < gridSystem.length; i++) {
+    startingPoint = String(i) + String(j);
+    // console.log(startingPoint);
+    j -= 1;
+    if (j < 0) {break;}
+  }
+
+  // Starting from startingPoint and moving up and to the right, checking if theres a win
+  let startCol = Number(startingPoint[1]);
+  let startRow = Number(startingPoint[0]);
+
+  for (let i = startRow; i > 0; i--) {
+    if (startCol > gridSystem[0].length-1) {
+      break;
+    } else {
+
+      if (gridSystem[i][startCol] === currentPlayer) {
+        totalCount += 1;
+        console.log(totalCount);
+      } else {totalCount = 0;}
+
+      if (totalCount === 4) {
+        alert('win');
+        return;
+      }
+      startCol += 1;
+    }
   }
 }
 
@@ -103,7 +128,7 @@ function checkWin(neededID, currentPlayer) {
 
   checkHorizontal(neededRow, currentPlayer);
   checkVertical(neededCol, currentPlayer);
-  checkPer(currentPlayer);
+  checkPer(neededRow, neededCol, currentPlayer);
 }
 
 function handleClick(event) {
@@ -137,9 +162,6 @@ function handleClick(event) {
 }
 
 createGrid();
-createHandler();
-
-
 
 // Later
 
